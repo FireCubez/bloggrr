@@ -1,4 +1,1 @@
-# Bloggrr
-Bloggrr is an online forum for bloggers. Everyone is welcome to join and start their own blog!
-
-*Stub.*
+Code for my blog site: https://bloggrr.herokuapp.com
