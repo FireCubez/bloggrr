@@ -84,6 +84,7 @@ app.post("/Special([\\:])API", function(req,res){
 			res.send(arr);
 			break;
 		case "pdel":
+			if(!auth(req,res)) return;
 			let ord = req.body.ord;
 			fs.unlinkSync("./posts/"+posts[ord].url);
 			posts.splice(ord,1);
@@ -93,6 +94,7 @@ app.post("/Special([\\:])API", function(req,res){
 			res.send(posts[req.body.ord].comm);
 			break;
 		case "exm":
+			if(!auth(req,res)) return;
 			posts.push({
 				ord: posts.length,
 				date: "13/11/18",
@@ -148,5 +150,12 @@ function valpass(req,res,must) {
 			res.sendStatus(403);
 			return false;
 		} else return true;
+	}
+}
+function auth(req,res) {
+	if(accs[req.body.u].perm) return true;
+	else {
+		res.sendStatus(403);
+		return false;
 	}
 }
