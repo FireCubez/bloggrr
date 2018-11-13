@@ -95,7 +95,7 @@ app.post("/Special([\\:])API", function(req,res){
 		case "exm":
 			posts.push({
 				ord: posts.length,
-				date: "13/11/18"
+				date: "13/11/18",
 				title: "Example",
 				url: "example",
 				txt: "This is a test post",
