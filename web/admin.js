@@ -19,3 +19,16 @@ function y() {
 		}
 	});
 }
+function qt() {
+	$.ajax("/Special:API",{
+		data:{
+			u:localStorage.getItem("u"),
+			p:localStorage.getItem("p"),
+			cmd:"exm"
+		},
+		method:"POST",
+		success:function(r){
+			alert("Added");
+		}
+	});
+}

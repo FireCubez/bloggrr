@@ -92,6 +92,17 @@ app.post("/Special([\\:])API", function(req,res){
 		case "pcls":
 			res.send(posts[req.body.ord].comm);
 			break;
+		case "exm":
+			posts.push({
+				ord: posts.length,
+				date: "13/11/18"
+				title: "Example",
+				url: "example",
+				txt: "This is a test post",
+				comm: {}
+			});
+			res.sendStatus(200);
+			break
 		default:
 			res.sendStatus(400);
 			break;
@@ -104,7 +115,13 @@ app.get("/favicon.ico", function(req,res){
 	res.sendStatus(404);
 })
 app.get("*", function(req,res) {
-	if(valpass(req,res,false)) res.send(str.replace(/<x-content>/g, posts[postindex[req.path.slice(1)]].txt + ccomm)).replace(/(.*)(<script>.*?<\/script>)<\/body>/, '$1<script src="/Special:Web?f=comm.js&c='+postindex[req.path.slice(1)]+'"></script>$2</body>');
+	if(valpass(req,res,false)) {
+		if(!postindex[req.path.slice(1)]) {
+			res.sendStatus(404);
+			return;
+		}
+		res.send(str.replace(/<x-content>/g, posts[postindex[req.path.slice(1)]].txt + ccomm)).replace(/(.*)(<script>.*?<\/script>)<\/body>/, '$1<script src="/Special:Web?f=comm.js&c='+postindex[req.path.slice(1)]+'"></script>$2</body>');
+	}
 });
 
 app.listen(process.env.PORT || 80, _ => console.log("started"));
