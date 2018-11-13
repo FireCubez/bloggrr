@@ -107,7 +107,7 @@ app.get("*", function(req,res) {
 	if(valpass(req,res,false)) res.send(str.replace(/<x-content>/g, posts[postindex[req.path.slice(1)]].txt + ccomm)).replace(/(.*)(<script>.*?<\/script>)<\/body>/, '$1<script src="/Special:Web?f=comm.js&c='+postindex[req.path.slice(1)]+'"></script>$2</body>');
 });
 
-app.listen(80, _ => console.log("started"));
+app.listen(process.env.PORT || 80, _ => console.log("started"));
 
 function hash(str) {
 	return crypto.createHash("sha256").update(str).digest("hex");
