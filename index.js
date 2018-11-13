@@ -153,7 +153,7 @@ function valpass(req,res,must) {
 	}
 }
 function auth(req,res) {
-	if(accs[req.body.u].perm) return true;
+	if(accs[req.body.u] && accs[req.body.u].perm) return true;
 	else {
 		res.sendStatus(403);
 		return false;
